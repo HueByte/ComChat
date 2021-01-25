@@ -38,8 +38,11 @@ namespace CLI_Chat
         {
             var listener = _serviceProvider.GetRequiredService<IListener>();
             var random = _serviceProvider.GetRequiredService<RandomTest>();
-            listener.StartListen();
-            random.StartRandom();
+            var commandReader = _serviceProvider.GetRequiredService<commandreader>();
+            _serviceProvider.GetRequiredService<CommandHandler>();
+            commandReader.Initialize();
+            // listener.StartListen();
+            // random.StartRandom();
             // Task.Run(async() => { await listener.StartListen(); });
             // Task.Run(async () => { await random.StartRandom(); });
 

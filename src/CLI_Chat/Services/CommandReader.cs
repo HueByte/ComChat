@@ -1,15 +1,16 @@
 using System;
 using System.Threading.Tasks;
+using CLI_Chat.Extensions;
 using Microsoft.Extensions.Logging;
 
 namespace CLI_Chat.Services
 {
-    public class CommandReader
+    public class commandreader : IInjectableService
     {
         private readonly ILogger _logger;
-        public event EventHandler<string> CommandHandler;
+        public event Func<string, Task> InputReceived;
 
-        public CommandReader(ILogger<CommandReader> logger)
+        public commandreader(ILogger<commandreader> logger)
         {
             _logger = logger;
         }
@@ -27,7 +28,7 @@ namespace CLI_Chat.Services
 
         protected virtual async Task OnCommand(string input)
         {
-            CommandHandler?.Invoke(this, input).GetContextAsync();
+            InputReceived?.Invoke(input);
         }
     }
 }
