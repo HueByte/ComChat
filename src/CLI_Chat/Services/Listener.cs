@@ -44,7 +44,7 @@ namespace CLI_Chat.Services
                 string result = await reader.ReadToEndAsync();
                 Console.WriteLine(result);
 
-                string responseString = "<html><body>xxx</body></html>";
+                string responseString = "<html><body>This is output</body></html>";
                 byte[] buffer = System.Text.Encoding.UTF8.GetBytes(responseString);
 
                 response.ContentLength64 = buffer.Length;
