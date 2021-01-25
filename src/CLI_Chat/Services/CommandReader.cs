@@ -7,7 +7,7 @@ namespace CLI_Chat.Services
     public class CommandReader
     {
         private readonly ILogger _logger;
-        public event EventHandler CommandHandler;
+        public event EventHandler<string> CommandHandler;
 
         public CommandReader(ILogger<CommandReader> logger)
         {
@@ -21,13 +21,13 @@ namespace CLI_Chat.Services
                 var input = Console.ReadLine();
                 //TODO
 
-                OnCommand(EventArgs.Empty);
+                await OnCommand(input);
             }
         }
 
-        protected virtual void OnCommand(EventArgs e)
+        protected virtual async Task OnCommand(string input)
         {
-            CommandHandler?.Invoke(this, e);
+            CommandHandler?.Invoke(this, input).GetContextAsync();
         }
     }
 }
